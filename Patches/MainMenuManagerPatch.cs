@@ -10,7 +10,9 @@ namespace TownOfHost
     {
         private static SimpleButton discordButton;
         public static SimpleButton UpdateButton { get; private set; }
-        private static SimpleButton gitHubButton;
+        private static SimpleButton tohGitHubButton;
+
+        private static SimpleButton tohhaGitHubButton;
 
         [HarmonyPatch(nameof(MainMenuManager.Start)), HarmonyPostfix, HarmonyPriority(Priority.Normal)]
         public static void StartPostfix(MainMenuManager __instance)
@@ -30,15 +32,26 @@ namespace TownOfHost
             }
 
             // GitHubボタンを生成
-            if (SimpleButton.IsNullOrDestroyed(gitHubButton))
+            if (SimpleButton.IsNullOrDestroyed(tohGitHubButton))
             {
-                gitHubButton = CreateButton(
-                    "GitHubButton",
+                tohGitHubButton = CreateButton(
+                    "tohGitHubButton",
                     new(1f, -1f, 1f),
                     new(153, 153, 153, byte.MaxValue),
                     new(209, 209, 209, byte.MaxValue),
                     () => Application.OpenURL("https://github.com/tukasa0001/TownOfHost"),
-                    "GitHub");
+                    "TOH GitHub");
+            }
+
+            if (SimpleButton.IsNullOrDestroyed(tohhaGitHubButton))
+            {
+                tohhaGitHubButton = CreateButton(
+                    "tohhaGitHubButton",
+                    new(1f, -1.5f, 1f),
+                    new(153, 153, 153, byte.MaxValue),
+                    new(209, 209, 209, byte.MaxValue),
+                    () => Application.OpenURL("https://github.com/Haroweeeeen/TownOfHost-Ha"),
+                    "TOH-Ha GitHub");
             }
 
             //Updateボタンを生成
